@@ -1,0 +1,31 @@
+.operations {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.operation-line {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px;
+}
+
+.operation-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: None;
+}
+
+.start-mark:hover {
+    color: red;
+}
