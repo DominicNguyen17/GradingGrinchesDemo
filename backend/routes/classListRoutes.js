@@ -4,8 +4,7 @@ const uploadMiddleware = require("../middlewares/uploadMiddleware");
 
 const router = express.Router();
 
-//MongoDB
-// router.post("/", classListController.uploadClassListData);
+router.post("/", classListController.uploadClassListData);
 router.post("/upload", uploadMiddleware.single("jsonFile"), classListController.uploadClassListJsonFile);
 router.get("/:id", classListController.getClassList);
 

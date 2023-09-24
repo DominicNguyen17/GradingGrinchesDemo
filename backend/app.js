@@ -9,6 +9,7 @@ const cors = require('cors');
 
 
 const classListRoutes = require("./routes/classListRoutes");
+const rubricRoutes = require("./routes/rubricRoutes");
 
 
 const app = express();
@@ -39,6 +40,7 @@ mongoose.connect('mongodb://localhost:27017/myDatabase', {
 app.use(bodyParser.json());
 
 app.use("/class-list", classListRoutes);
+app.use("/rubric", rubricRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

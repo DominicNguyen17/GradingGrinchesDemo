@@ -1,0 +1,45 @@
+{
+    "owner": "Prof fake",
+    "assignment title": "Assignment 1",
+    "rubric": [
+        {
+            "question_title": "1",
+            "marks": 5,
+            "marker comments": "good",
+            "feedbacks": [
+                {"feedback": "content1"},
+                {"feedback": "content2"}
+            ]
+        },
+        {
+
+            "question_title": "2",
+            "marks": 5,
+            "marker comments": "good",
+            "feedbacks": [
+                {"feedback": "content1"},
+                {"feedback": "content2"}
+            ]
+        },
+        {
+
+            "question_title": "3",
+            "marks": 5,
+            "marker comments": "good",
+            "feedbacks": [
+                {"feedback": "content1"},
+                {"feedback": "content2"}
+            ]
+        },
+        {
+
+            "question_title": "4",
+            "marks": 5,
+            "marker comments": "good",
+            "feedbacks": [
+                {"feedback": "content1"},
+                {"feedback": "content2"}
+            ]
+        }
+    ]
+}

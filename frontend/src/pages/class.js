@@ -28,6 +28,7 @@ const Class = () => {
                 if (response.ok) {
                     const data = await response.json();
                     console.log(data);
+
                     handleClassUpload(data.id, true);
                 } else {
                     console.error("Failed to upload file");
@@ -38,6 +39,11 @@ const Class = () => {
         } else {
             console.error("No file to upload");
         }
+    }
+    const handleRemoveClassList = async (e) => {
+        e.preventDefault();
+        setFetchedClassList(null);
+        handleClassUpload(null, false);
     }
 
     useEffect(() => {
@@ -63,13 +69,13 @@ const Class = () => {
     }, [classListId])
 
     return (
-        <div>
+        <div className="main-page">
             <Header></Header>
             {classUploaded ?
-                <div>
+                <div className="class-list">
                     <h1>Class List</h1>
                     {fetchedClassList ? (
-                        <table className="fetched-class-table">
+                        <table className="fetched-rubric-table">
                             <thead>
                             <tr>
                                 <th>Student ID</th>
@@ -112,13 +118,18 @@ const Class = () => {
                     </table>
                     <Container>
                         <form onSubmit={handleSubmit} encType="multipart/form-data">
-                            <input type="file" name="jsonFile" accept=".json" />
-                            <input type="submit" value="Upload" />
+                            <input type="file" name="jsonFile" accept=".json"/>
+                            <input type="submit" value="Upload"/>
                         </form>
                     </Container>
                 </div>
             }
-            <Link to={"/"}>Back to Home</Link>
+            <div>
+                {classUploaded ? <button onClick={handleRemoveClassList}>Remove Class List</button> : null
+                }
+                <br/>
+                <Link to={"/"}>Back to Home</Link>
+            </div>
         </div>
     );
 }

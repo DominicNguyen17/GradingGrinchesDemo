@@ -1,0 +1,72 @@
+.rubric {
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}
+
+.rubric-sample-table {
+    border-spacing: 0;
+    margin: auto auto 30px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+.rubric-sample-table thead {
+    background: aquamarine;
+}
+
+.back-home {
+    text-decoration: none;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 20px;
+}
+
+/* fetch the rubric table*/
+
+
+.fetched-rubric-table,
+.rubric-sample-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+/* Header styling */
+.fetched-rubric-table th,
+.rubric-sample-table th {
+    background-color: #f2f2f2;
+    color: black;
+    padding: 12px;
+}
+
+/* Row styling */
+.fetched-rubric-table tr,
+.rubric-sample-table tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+/* Cell styling */
+.fetched-rubric-table td,
+.rubric-sample-table td {
+    padding: 12px;
+}
+
+/* Row hover styling */
+.fetched-rubric-table tr:hover,
+.rubric-sample-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* First row should not have a border on the bottom */
+.fetched-rubric-table tr:first-of-type,
+.rubric-sample-table tr:first-of-type {
+    border-bottom: none;
+}

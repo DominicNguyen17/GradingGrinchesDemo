@@ -1,20 +1,21 @@
-const ClassListDataModel = require("../models/classListModel");
+const RubricModel = require("../models/rubricModel");
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
 const { PutCommand, DynamoDBDocumentClient, GetCommand  } = require("@aws-sdk/lib-dynamodb");
 const client = new DynamoDBClient({ region: "ap-southeast-2" })
 const docClient = DynamoDBDocumentClient.from(client);
-const dynamodbTableName = 'classList';
+const dynamodbTableName = 'Rubric';
 const { v4: uuidv4 } = require('uuid')
 
 const isValidJsonFormat = (data) => {
-    if (!data || !data["class-list"] || !Array.isArray(data["class-list"])) {
+    if (!data || !data["assignment title"] || !data["owner"] || !data["rubric"] || !Array.isArray(data["rubric"])) {
         return false;
     }
-    for (const item of data["class-list"]) {
+    for (const item of data["rubric"]) {
         if (
-            typeof item["Student ID"] !== "string" ||
-            typeof item["Class ID"] !== "string" ||
-            typeof item["Assignment ID"] !== "string"
+            typeof item["question_title"] !== "string" ||
+            typeof item["marks"] !== "number" ||
+            typeof item["marker comments"] !== "string"
+            // Todo - add check for feedbacks
         ) {
             return false;
         }
@@ -31,26 +32,7 @@ const isFileValid = (file) => {
 }
 
 
-exports.uploadClassListData = async (req, res) => {
-    // file must exist and be a json file
-    if (!isFileValid(req.file)) {
-        return res.status(400).send("Invalid file format.");
-    }
-
-    if (!isValidJsonFormat(req.body)) {
-        return res.status(400).send("Invalid JSON format.");
-    }
-
-    try {
-        const jsonData = new ClassListDataModel({ "class-list": req.body["class-list"] });
-        const savedFile = await jsonEntry.save();
-        res.status(200).json({ message: "JSON file uploaded and data saved!", id: savedFile._id });
-    } catch (error) {
-        res.status(500).send(error);
-    }
-};
-
-exports.uploadClassListJsonFile = async (req, res) => {
+exports.uploadRubricJsonFile = async (req, res) => {
     // file must exist and be a json file
     if (!isFileValid(req.file)) {
         return res.status(400).send("Invalid file format.");
@@ -68,8 +50,10 @@ exports.uploadClassListJsonFile = async (req, res) => {
         const params = {
             TableName: dynamodbTableName,
             Item: {
-                'id': uuidv4(), // Provide a unique identifier for the item
-                "class-list": jsonData["class-list"], // Convert the JSON to a string
+                'id': uuidv4(),
+                'owner': jsonData["owner"], 
+                'assignment title': jsonData["assignment title"],
+                'rubric': jsonData["rubric"], 
             },
         };
         const command = new PutCommand(params);
@@ -77,7 +61,7 @@ exports.uploadClassListJsonFile = async (req, res) => {
         res.status(200).json({ message: "JSON file uploaded and data saved!", id: params.Item.id});
 
         // //MongoDb
-        // const jsonEntry = new ClassListDataModel({ "class-list": jsonData["class-list"] });
+        // const jsonEntry = new RubricModel({ "owner": jsonData["owner"], "assignment title": jsonData["assignment title"], "rubric": jsonData["rubric"] });
         // const savedFile = await jsonEntry.save();
         // res.status(200).json({ message: "JSON file uploaded and data saved!", id: savedFile._id });
     } catch (error) {
@@ -85,7 +69,7 @@ exports.uploadClassListJsonFile = async (req, res) => {
     }
 };
 
-exports.getClassList = async (req, res) => {
+exports.getRubric = async (req, res) => {
     try {
         //DynamoDb
         const id = req.params.id;
@@ -97,17 +81,17 @@ exports.getClassList = async (req, res) => {
         });
         const response = await docClient.send(command);
         if (!response) {
-            return res.status(404).send("Class List not found");
+            return res.status(404).send("Rubric not found");
         }
         res.status(200).json(response.Item);
 
-        // //MongoDb
+        // //MongdoDb
         // const id = req.params.id;
-        // const classList = await ClassListDataModel.findById(id);
-        // if (!classList) {
-        //     return res.status(404).send("Class List not found");
+        // const rubric = await RubricModel.findById(id);
+        // if (!rubric) {
+        //     return res.status(404).send("Rubric not found");
         // }
-        // res.status(200).json(classList);
+        // res.status(200).json(rubric);
     } catch (error) {
         res.status(500).send("Internal Server Error");
     }

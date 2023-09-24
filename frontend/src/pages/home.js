@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 
 const Home = ({rubricUploaded, handleRubricUpload}) => {
 
-    return <div>
+    return <div className="main-page">
         <Header></Header>
         <div className="operations">
             <section className="operation-line">
