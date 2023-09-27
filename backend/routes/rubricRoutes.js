@@ -8,4 +8,4 @@ const router = express.Router();
 router.post("/upload", uploadMiddleware.single("jsonFile"), rubricController.uploadRubricJsonFile);
 router.get("/:id", rubricController.getRubric);
 
-module.exports = router;                    
+module.exports = router;

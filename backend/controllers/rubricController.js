@@ -1,10 +1,10 @@
 const RubricModel = require("../models/rubricModel");
-const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-const { PutCommand, DynamoDBDocumentClient, GetCommand  } = require("@aws-sdk/lib-dynamodb");
-const client = new DynamoDBClient({ region: "ap-southeast-2" })
-const docClient = DynamoDBDocumentClient.from(client);
-const dynamodbTableName = 'Rubric';
-const { v4: uuidv4 } = require('uuid')
+// const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+// const { PutCommand, DynamoDBDocumentClient, GetCommand  } = require("@aws-sdk/lib-dynamodb");
+// const client = new DynamoDBClient({ region: "ap-southeast-2" })
+// const docClient = DynamoDBDocumentClient.from(client);
+// const dynamodbTableName = 'Rubric';
+// const { v4: uuidv4 } = require('uuid')
 
 const isValidJsonFormat = (data) => {
     if (!data || !data["assignment title"] || !data["owner"] || !data["rubric"] || !Array.isArray(data["rubric"])) {
@@ -46,24 +46,24 @@ exports.uploadRubricJsonFile = async (req, res) => {
     }
 
     try {
-        //DynamoDb
-        const params = {
-            TableName: dynamodbTableName,
-            Item: {
-                'id': uuidv4(),
-                'owner': jsonData["owner"], 
-                'assignment title': jsonData["assignment title"],
-                'rubric': jsonData["rubric"], 
-            },
-        };
-        const command = new PutCommand(params);
-        const response = await docClient.send(command);
-        res.status(200).json({ message: "JSON file uploaded and data saved!", id: params.Item.id});
+        // //DynamoDb
+        // const params = {
+        //     TableName: dynamodbTableName,
+        //     Item: {
+        //         'id': uuidv4(),
+        //         'owner': jsonData["owner"],
+        //         'assignment title': jsonData["assignment title"],
+        //         'rubric': jsonData["rubric"],
+        //     },
+        // };
+        // const command = new PutCommand(params);
+        // const response = await docClient.send(command);
+        // res.status(200).json({ message: "JSON file uploaded and data saved!", id: params.Item.id});
 
-        // //MongoDb
-        // const jsonEntry = new RubricModel({ "owner": jsonData["owner"], "assignment title": jsonData["assignment title"], "rubric": jsonData["rubric"] });
-        // const savedFile = await jsonEntry.save();
-        // res.status(200).json({ message: "JSON file uploaded and data saved!", id: savedFile._id });
+        //MongoDb
+        const jsonEntry = new RubricModel({ "owner": jsonData["owner"], "assignment title": jsonData["assignment title"], "rubric": jsonData["rubric"] });
+        const savedFile = await jsonEntry.save();
+        res.status(200).json({ message: "JSON file uploaded and data saved!", id: savedFile._id });
     } catch (error) {
         res.status(500).send(error);
     }
@@ -71,27 +71,27 @@ exports.uploadRubricJsonFile = async (req, res) => {
 
 exports.getRubric = async (req, res) => {
     try {
-        //DynamoDb
-        const id = req.params.id;
-        const command = new GetCommand({
-            TableName: dynamodbTableName,
-            Key: {
-                'id': id,
-            },
-        });
-        const response = await docClient.send(command);
-        if (!response) {
-            return res.status(404).send("Rubric not found");
-        }
-        res.status(200).json(response.Item);
-
-        // //MongdoDb
+        // //DynamoDb
         // const id = req.params.id;
-        // const rubric = await RubricModel.findById(id);
-        // if (!rubric) {
+        // const command = new GetCommand({
+        //     TableName: dynamodbTableName,
+        //     Key: {
+        //         'id': id,
+        //     },
+        // });
+        // const response = await docClient.send(command);
+        // if (!response) {
         //     return res.status(404).send("Rubric not found");
         // }
-        // res.status(200).json(rubric);
+        // res.status(200).json(response.Item);
+
+        //MongdoDb
+        const id = req.params.id;
+        const rubric = await RubricModel.findById(id);
+        if (!rubric) {
+            return res.status(404).send("Rubric not found");
+        }
+        res.status(200).json(rubric);
     } catch (error) {
         res.status(500).send("Internal Server Error");
     }

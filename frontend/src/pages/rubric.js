@@ -4,19 +4,21 @@ import Container from "../components/container";
 import Header from "../components/header";
 import {Link} from "react-router-dom";
 import "../css/rubric.css";
+import "../css/common.css";
 
 const Rubric = () => {
+    const {rubricUploaded, handleRubricUpload, serverUrl, fetchedRubric} = useContext(AppContext);
 
-    const {rubricUploaded, handleRubricUpload, rubricId} = useContext(AppContext);
-    const [fetchedRubric, setFetchedRubric] = useState(null);
+    // for the rubric upload
+    const [rubricId, setRubricId] = useState(null);
 
+    // once the user upload the rubric, it would return the rubric id
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
         const fileInput = e.target.elements.jsonFile;
         const file = fileInput.files[0];
-        const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:8888';
         if (file) {
             try {
                 const response = await fetch(`${serverUrl}/rubric/upload`, {
@@ -26,9 +28,7 @@ const Rubric = () => {
 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log(data);
-
-                    handleRubricUpload(data.id, true);
+                    setRubricId(data.id);
                 } else {
                     console.error("Failed to upload file");
                 }
@@ -39,33 +39,31 @@ const Rubric = () => {
             console.error("No file to upload");
         }
     }
+
     const handleRemoveRubric = async (e) => {
         e.preventDefault();
-        setFetchedRubric(null);
         handleRubricUpload(null, false);
     }
 
     useEffect(() => {
-        console.log("useEffect triggered. Current rubricId:", rubricId); // Debugging line
-        if (rubricId) {
-            const fetchRubricList = async () => {
-                const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:8888';
-                try {
-                    const response = await fetch(`${serverUrl}/rubric/${rubricId}`);
-                    if (response.ok) {
-                        const data = await response.json();
-                        console.log(data);
-                        setFetchedRubric(data); // Set the fetched data to state
-                    } else {
-                        console.error("Failed to fetch class list");
-                    }
-                } catch (error) {
-                    console.error("There was a problem fetching the class list", error);
+        const fetchRubricList = async () => {
+            //const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:8888';
+            try {
+                const response = await fetch(`${serverUrl}/rubric/${rubricId}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    handleRubricUpload(data, true);
+                } else {
+                    console.error("Failed to fetch rubric");
                 }
-            };
-
-            fetchRubricList();
+            } catch (error) {
+                console.error("There was a problem fetching the rubric", error);
+            }
+        };
+        if (rubricId) {
+            fetchRubricList().then(r => console.log("fetchRubricList() called"));
         }
+
     }, [rubricId])
 
     return (
@@ -77,7 +75,7 @@ const Rubric = () => {
                         <div>
                             <h1>{fetchedRubric["assignment title"]}</h1>
                             <p>Owner: {fetchedRubric["owner"]}</p>
-                            <table className="fetched-rubric-table">
+                            <table className="marking-table">
                                 <thead>
                                 <tr>
                                     <th>Question</th>
@@ -135,11 +133,10 @@ const Rubric = () => {
                     </Container>
                 </div>
             }
-            <div>
-                {rubricUploaded ? <button onClick={handleRemoveRubric}>Remove Rubric</button> : null
+            <div className="operations">
+                {rubricUploaded ? <button className="red-button" onClick={handleRemoveRubric}>Remove Rubric</button> : null
                 }
-                <br/>
-                <Link to={"/"}>Back to Home</Link>
+                <Link className="link" to={"/"}>Back to Home</Link>
             </div>
         </div>
     )

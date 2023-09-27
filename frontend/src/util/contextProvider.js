@@ -2,27 +2,50 @@ import React, {useState} from 'react';
 import AppContext from "./context";
 
 const AppProvider = ({children}) => {
+    // set up the global server url
+    const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:8888';
+    // states for rubric upload
     const [rubricUploaded, setRubricUploaded] = useState(false);
+    const [fetchedRubric, setFetchedRubric] = useState(null);
+
+    // states for class list upload
     const [classUploaded, setClassUploaded] = useState(false);
+    const [fetchedClassList, setFetchedClassList] = useState(null);
 
-    const [classListId, setClassListId] = useState(null);
-    const [rubricId, setRubricId] = useState(null);
+    // states for marking
+    const [currentStudentIndex, setCurrentStudentIndex] = useState(0);
+    const [markedStudents, setMarkedStudents] = useState([]);
+    const isStudentMarked = (studentID) => markedStudents.includes(studentID);
 
+    const markStudent = (studentID) => {
+        if (!isStudentMarked(studentID)) {
+            setMarkedStudents((prevMarked) => [...prevMarked, studentID]);
+        }
+    };
 
-    const handleClassUpload = (class_list_id, isUploaded) => {
+    const unmarkStudent = (studentID) => {
+        setMarkedStudents((prevMarked) => prevMarked.filter(id => id !== studentID));
+    };
+
+    const handleClassUpload = (fetchedClassList, isUploaded) => {
         setClassUploaded(isUploaded);
-        setClassListId(class_list_id);
+        setFetchedClassList(fetchedClassList);
+        setCurrentStudentIndex(0)
+        setMarkedStudents([])
     }
 
-    const handleRubricUpload = (rubric_id, isUploaded) => {
+    const handleRubricUpload = (fetchedRubric, isUploaded) => {
         setRubricUploaded(isUploaded);
-        setRubricId(rubric_id);
+        setFetchedRubric(fetchedRubric);
+        setCurrentStudentIndex(0)
+        setMarkedStudents([])
     }
 
     return (
         <AppContext.Provider value={{
-            rubricUploaded, handleRubricUpload, rubricId,
-            classUploaded, handleClassUpload, classListId
+            rubricUploaded, handleRubricUpload, fetchedRubric, currentStudentIndex, setCurrentStudentIndex,
+            classUploaded, handleClassUpload, fetchedClassList, serverUrl,
+            markedStudents, isStudentMarked, markStudent, unmarkStudent
         }}>
             {children}
         </AppContext.Provider>

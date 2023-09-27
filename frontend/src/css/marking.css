@@ -1,0 +1,62 @@
+.marking {
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}
+
+.marking-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.marking-student {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.marking-operations button {
+    margin: 3px;
+}
+
+/* make the last button of marking-operation more space after the previous one button*/
+.marking-operations button:last-child {
+    margin-left: 20px;
+}
+
+
+/* marking table */
+.marking-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+/* Header styling */
+.marking-table th  {
+    background-color: #f2f2f2;
+    color: black;
+    padding: 12px;
+}
+
+/* Row styling */
+.marking-table tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+/* Cell styling */
+.marking-table td {
+    padding: 12px;
+}
+
+/* Row hover styling */
+.marking-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* First row should not have a border on the bottom */
+.marking-table tr:first-of-type {
+    border-bottom: none;
+}

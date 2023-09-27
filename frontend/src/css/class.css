@@ -28,8 +28,6 @@ table, th, td {
 }
 
 /* fetch the class list table*/
-
-
 .fetched-class-table,
 .class-sample-table {
     width: 100%;
@@ -69,4 +67,10 @@ table, th, td {
 .fetched-class-table tr:first-of-type,
 .class-sample-table tr:first-of-type {
     border-bottom: none;
+}
+
+/*  */
+.description {
+    font-size: 2.0rem;
+    margin-top: 100px;
 }

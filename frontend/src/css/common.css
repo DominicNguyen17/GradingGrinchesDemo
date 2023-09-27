@@ -1,0 +1,65 @@
+/* red button with white text color*/
+.red-button {
+    background-color: #f44336; /* Red */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.red-button:hover {
+    background-color: #da190b; /* Red */
+    color: white;
+}
+
+/* blue button */
+.blue-button {
+    background-color: #008CBA; /* Blue */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.blue-button:hover {
+    background-color: #006CBA; /* Blue */
+    color: white;
+}
+
+/* green button */
+.green-button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.green-button:hover {
+    background-color: #3e8e41; /* Green */
+    color: white;
+}
+
+
+/* link */
+.link {
+    text-decoration: none;
+    color: black;
+    font-size: larger;
+    font-weight: bold;
+    margin: 20px;
+}
+
+.operations {
+    display: flex;
+    flex-direction: column;
+}

@@ -4,11 +4,13 @@ import Header from "../components/header";
 import Container from "../components/container";
 import {Link} from "react-router-dom";
 import "../css/class.css";
+import '../css/common.css'
 
 const Class = () => {
 
-    const {classUploaded, handleClassUpload, classListId} = useContext(AppContext);
-    const [fetchedClassList, setFetchedClassList] = useState(null);
+    const {classUploaded, handleClassUpload, rubricUploaded, fetchedClassList, serverUrl} = useContext(AppContext);
+    // for class List upload
+    const [classListId, setClassListId] = useState(null);
 
 
     const handleSubmit = async (e) => {
@@ -17,7 +19,6 @@ const Class = () => {
         const formData = new FormData(e.target);
         const fileInput = e.target.elements.jsonFile;
         const file = fileInput.files[0];
-        const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:8888';
         if (file) {
             try {
                 const response = await fetch(`${serverUrl}/class-list/upload`, {
@@ -27,9 +28,7 @@ const Class = () => {
 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log(data);
-
-                    handleClassUpload(data.id, true);
+                    setClassListId(data.id)
                 } else {
                     console.error("Failed to upload file");
                 }
@@ -40,22 +39,21 @@ const Class = () => {
             console.error("No file to upload");
         }
     }
+
     const handleRemoveClassList = async (e) => {
         e.preventDefault();
-        setFetchedClassList(null);
         handleClassUpload(null, false);
     }
 
     useEffect(() => {
-        console.log("useEffect triggered. Current classListId:", classListId); // Debugging line
         if (classListId) {
             const fetchClassList = async () => {
-                const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:8888';
                 try {
                     const response = await fetch(`${serverUrl}/class-list/${classListId}`);
                     if (response.ok) {
                         const data = await response.json();
-                        setFetchedClassList(data); // Set the fetched data to state
+                        console.log(data)
+                        handleClassUpload(data, true);
                     } else {
                         console.error("Failed to fetch class list");
                     }
@@ -63,19 +61,18 @@ const Class = () => {
                     console.error("There was a problem fetching the class list", error);
                 }
             };
-
-            fetchClassList();
+            fetchClassList().then(r => console.log("fetchClassList() called"));
         }
     }, [classListId])
 
     return (
         <div className="main-page">
             <Header></Header>
-            {classUploaded ?
+            {rubricUploaded ? (<div>{classUploaded ?
                 <div className="class-list">
                     <h1>Class List</h1>
                     {fetchedClassList ? (
-                        <table className="fetched-rubric-table">
+                        <table className="marking-table">
                             <thead>
                             <tr>
                                 <th>Student ID</th>
@@ -123,12 +120,13 @@ const Class = () => {
                         </form>
                     </Container>
                 </div>
-            }
-            <div>
-                {classUploaded ? <button onClick={handleRemoveClassList}>Remove Class List</button> : null
+            }</div>) : (<div className="description">You need to upload your rubric firstly</div>)}
+
+            <div className='operations'>
+                {classUploaded && rubricUploaded ? <button className="red-button" onClick={handleRemoveClassList}>Remove Class List</button> : null
                 }
                 <br/>
-                <Link to={"/"}>Back to Home</Link>
+                <Link className="link" to={"/"}>Back to Home</Link>
             </div>
         </div>
     );
