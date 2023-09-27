@@ -25,7 +25,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect('mongodb://user:password@ec2-3-27-114-9.ap-southeast-2.compute.amazonaws.com:27017/myDatabase?authMechanism=DEFAULT', {
+mongoose.connect('mongodb+srv://DominicNguyen:Phu17022001@cluster0.mongodb.net/myDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
