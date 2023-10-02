@@ -11,8 +11,7 @@ const Header = () => {
     const navigate = useNavigate();
 
     const handleSelect = (value) => {
-        setSelected(value);
-        console.log("Selected value:", value);
+        navigate("/" + value);
         setIsOpen(false);
     };
 
@@ -48,8 +47,8 @@ const Header = () => {
                 </div>
                 {isOpen && (
                     <div className="dropdown-options">
-                        <div onClick={() => handleSelect("About MarkWise")}>About MarkWise</div>
-                        <div onClick={() => handleSelect("About the team")}>About the team</div>
+                        <div onClick={() => handleSelect("aboutTeam")}>About Team</div>
+                        <div onClick={() => handleSelect("aboutMarkWise")}>About MarkWise</div>
                     </div>
                 )}
             </div>

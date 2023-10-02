@@ -5,6 +5,8 @@ import Rubric from "./pages/rubric";
 import Class from "./pages/class";
 import AppProvider from "./util/contextProvider";
 import Marking from "./pages/marking";
+import AboutTeam from "./pages/aboutTeam";
+import AboutMarkWise from "./pages/aboutMarkWise";
 
 function App() {
 
@@ -16,6 +18,8 @@ function App() {
                     <Route path="/rubric" element={<Rubric/>}></Route>
                     <Route path="/class" element={<Class/>}></Route>
                     <Route path="/marking" element={<Marking/>}></Route>
+                    <Route path="/aboutTeam" element={<AboutTeam/>}></Route>
+                    <Route path="/aboutMarkWise" element={<AboutMarkWise/>}></Route>
                 </Routes>
             </div>
         </AppProvider>

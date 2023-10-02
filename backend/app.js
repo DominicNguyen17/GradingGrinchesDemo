@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
-
 const classListRoutes = require("./routes/classListRoutes");
 const rubricRoutes = require("./routes/rubricRoutes");
 

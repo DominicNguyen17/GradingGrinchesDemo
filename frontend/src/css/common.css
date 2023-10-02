@@ -8,6 +8,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .red-button:hover {
@@ -25,6 +26,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .blue-button:hover {
@@ -42,6 +44,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .green-button:hover {
@@ -62,4 +65,38 @@
 .operations {
     display: flex;
     flex-direction: column;
+}
+
+/* feedback style */
+.select-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    border-radius: 4px;
+    overflow: hidden;
+    min-width: 300px;
+}
+
+.select-container select {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.select-container:after {
+    content: '▼';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    pointer-events: none;
+    font-size: 20px;
+    color: #777;
 }

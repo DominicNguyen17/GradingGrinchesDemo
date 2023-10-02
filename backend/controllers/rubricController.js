@@ -46,21 +46,6 @@ exports.uploadRubricJsonFile = async (req, res) => {
     }
 
     try {
-        // //DynamoDb
-        // const params = {
-        //     TableName: dynamodbTableName,
-        //     Item: {
-        //         'id': uuidv4(),
-        //         'owner': jsonData["owner"],
-        //         'assignment title': jsonData["assignment title"],
-        //         'rubric': jsonData["rubric"],
-        //     },
-        // };
-        // const command = new PutCommand(params);
-        // const response = await docClient.send(command);
-        // res.status(200).json({ message: "JSON file uploaded and data saved!", id: params.Item.id});
-
-        //MongoDb
         const jsonEntry = new RubricModel({ "owner": jsonData["owner"], "assignment title": jsonData["assignment title"], "rubric": jsonData["rubric"] });
         const savedFile = await jsonEntry.save();
         res.status(200).json({ message: "JSON file uploaded and data saved!", id: savedFile._id });
@@ -71,21 +56,6 @@ exports.uploadRubricJsonFile = async (req, res) => {
 
 exports.getRubric = async (req, res) => {
     try {
-        // //DynamoDb
-        // const id = req.params.id;
-        // const command = new GetCommand({
-        //     TableName: dynamodbTableName,
-        //     Key: {
-        //         'id': id,
-        //     },
-        // });
-        // const response = await docClient.send(command);
-        // if (!response) {
-        //     return res.status(404).send("Rubric not found");
-        // }
-        // res.status(200).json(response.Item);
-
-        //MongdoDb
         const id = req.params.id;
         const rubric = await RubricModel.findById(id);
         if (!rubric) {
@@ -96,3 +66,28 @@ exports.getRubric = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 }
+
+
+exports.updateRubric = async (req, res) => {
+    const id = req.params.id;
+    const updatedRubric = req.body;
+
+    console.log(updatedRubric);
+
+    try {
+        const rubric = await RubricModel.findById(id);
+        if (!rubric) {
+            return res.status(404).send("Rubric not found");
+        }
+
+        // update rubric
+        rubric.set(updatedRubric);
+        const savedRubric = await rubric.save();
+        console.log(savedRubric);
+        res.status(200).json(savedRubric);
+
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send("Internal Server Error");
+    }
+};

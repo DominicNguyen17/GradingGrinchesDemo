@@ -7,5 +7,6 @@ const router = express.Router();
 // router.post("/", classListController.uploadClassListData);
 router.post("/upload", uploadMiddleware.single("jsonFile"), rubricController.uploadRubricJsonFile);
 router.get("/:id", rubricController.getRubric);
+router.put("/:id", rubricController.updateRubric);
 
 module.exports = router;

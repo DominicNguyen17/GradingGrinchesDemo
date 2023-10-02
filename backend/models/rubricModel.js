@@ -15,6 +15,8 @@ const RubricSchema = new mongoose.Schema({
     "owner": String,
     "assignment title": String,
     "rubric": [RubricItemSchema],
+}, {
+    versionKey: false
 });
 
 const RubricModel = mongoose.model("RubricModel", RubricSchema);

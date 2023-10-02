@@ -22,7 +22,7 @@ const Home = ({rubricUploaded, handleRubricUpload}) => {
             </section>
             <section className="operation-line">
                 <Container>
-                    <Link className="operation-name" to={"/marking"}>
+                    <Link className="operation-name start-mark" to={"/marking"}>
                         Start Marking
                     </Link>
                 </Container>

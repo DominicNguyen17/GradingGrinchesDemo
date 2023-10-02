@@ -46,21 +46,6 @@ const Marking = () => {
 
     const fetchStudentMarkingData = async (studentID) => {
 
-        // if(studentID === "3") {
-        //     setStudentMarking(
-        //              {
-        //                 1: {
-        //                     "grade": '3',
-        //                     "feedback": "content1"
-        //                 },
-        //                 2: {
-        //                     "grade": "2",
-        //                     "feedback": "conetent2"
-        //                 },
-        //             }
-        //     )
-        // }
-
         try {
             // Assuming your server expects a URL like "/studentMarks/{studentID}"
             const response = await fetch(`${serverUrl}/marking?studentID=${studentID}&classListId=${fetchedClassList["_id"]}`);
@@ -127,8 +112,8 @@ const Marking = () => {
                                 Student ID: {get_student_ID()}
                             </div>
                             <div className="marking-operations">
-                                <button className="blue-button" onClick={move_to_previous_student}>Previous</button>
-                                <button className="blue-button" onClick={move_to_next_student}>Next</button>
+                                <button className="blue-button" onClick={move_to_previous_student}>Save & Previous Student</button>
+                                <button className="blue-button" onClick={move_to_next_student}>Save & Next Student</button>
                                 <button className="red-button" onClick={handle_save_and_exit}>Save & Exit</button>
                             </div>
                         </div>
@@ -152,32 +137,38 @@ const Marking = () => {
                                             <td>{question["marker comments"]}</td>
 
                                             <td>
-                                                <select value={studentMarking[question["question_title"]]?.grade || ''}
-                                                        onChange={e => setStudentMarking(prev => ({...prev,
-                                                            [question["question_title"]]: {
-                                                                ...prev[question["question_title"]],
-                                                                grade: e.target.value
-                                                            }
-                                                        }))}>
-                                                    <option value="" disabled hidden>Select a grade</option>
-                                                    {Array.from({length: question["marks"] + 1}, (_, i) => i).map((item, index) => (
-                                                        <option key={index}>{item}</option>)
-                                                    )}
-                                                </select>
+                                                <div className="select-container">
+                                                    <select value={studentMarking[question["question_title"]]?.grade || ''}
+                                                            onChange={e => setStudentMarking(prev => ({...prev,
+                                                                [question["question_title"]]: {
+                                                                    ...prev[question["question_title"]],
+                                                                    grade: e.target.value
+                                                                }
+                                                            }))}>
+                                                        <option value="" disabled hidden>Select a grade</option>
+                                                        {Array.from({length: question["marks"] + 1}, (_, i) => i).map((item, index) => (
+                                                            <option key={index}>{item}</option>)
+                                                        )}
+                                                    </select>
+                                                </div>
+
                                             </td>
                                             <td>
-                                                <select value={studentMarking[question["question_title"]]?.feedback || ''}
-                                                        onChange={e => setStudentMarking(prev => ({...prev,
-                                                            [question["question_title"]]: {
-                                                                ...prev[question["question_title"]],
-                                                                feedback: e.target.value
-                                                            }
-                                                        }))}>
-                                                    <option value="" disabled hidden>Select a feedback</option>
-                                                    {question["feedbacks"].map((feedback, index) => (
-                                                        <option key={index}>{feedback["feedback"]}</option>)
-                                                    )}
-                                                </select>
+                                                <div className="select-container">
+                                                    <select value={studentMarking[question["question_title"]]?.feedback || ''}
+                                                            onChange={e => setStudentMarking(prev => ({...prev,
+                                                                [question["question_title"]]: {
+                                                                    ...prev[question["question_title"]],
+                                                                    feedback: e.target.value
+                                                                }
+                                                            }))}>
+                                                        <option value="" disabled hidden>Select a feedback</option>
+                                                        {question["feedbacks"].map((feedback, index) => (
+                                                            <option key={index}>{feedback["feedback"]}</option>)
+                                                        )}
+                                                    </select>
+                                                </div>
+
                                             </td>
                                         </tr>
                                     )

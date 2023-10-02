@@ -8,7 +8,7 @@ import '../css/common.css'
 
 const Class = () => {
 
-    const {classUploaded, handleClassUpload, rubricUploaded, fetchedClassList, serverUrl} = useContext(AppContext);
+    const {classUploaded, handleClassUpload, rubricUploaded, fetchedClassList, fetchedRubric, serverUrl} = useContext(AppContext);
     // for class List upload
     const [classListId, setClassListId] = useState(null);
 
@@ -78,6 +78,9 @@ const Class = () => {
                                 <th>Student ID</th>
                                 <th>Class ID</th>
                                 <th>Assignment ID</th>
+                                {fetchedRubric["rubric"].map((item, index) => (
+                                    <th key={item["question_title"]}>{item["question_title"]}</th>
+                                ))}
                             </tr>
                             </thead>
                             <tbody>
@@ -86,6 +89,9 @@ const Class = () => {
                                     <td>{item["Student ID"]}</td>
                                     <td>{item["Class ID"]}</td>
                                     <td>{item["Assignment ID"]}</td>
+                                    {fetchedRubric["rubric"].map((item, index) => (
+                                        <td key={item["question_title"]}></td>
+                                    ))}
                                 </tr>
                             ))}
                             </tbody>
