@@ -23,6 +23,4 @@ jobs:
             cd /workplace/GradingGrinchesDemo/
             git pull origin main # Pull the latest changes from GitHub
             npm install # Install production dependencies
-            docker compose up
-            
-        continue-on-error: true
+            sudo docker compose up
