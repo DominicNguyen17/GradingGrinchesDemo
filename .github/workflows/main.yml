@@ -13,11 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Dependencies and Build
-        run: |
-          npm install
-          npm run build # Adjust this based on your build script
-
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@master
         with:
