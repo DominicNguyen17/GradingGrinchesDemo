@@ -22,5 +22,12 @@ jobs:
           script: |
             cd /workplace/GradingGrinchesDemo/
             git pull origin main # Pull the latest changes from GitHub
-            npm install # Install production dependencies
-            sudo docker compose up
+            cd /backend/
+            npm install
+            sudo systemctl restart backend
+            cd ..
+            cd /frontend/
+            npm install
+            sudo systemctl restart frontend
+
+            
