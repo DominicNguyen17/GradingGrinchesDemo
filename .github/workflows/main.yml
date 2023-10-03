@@ -24,10 +24,10 @@ jobs:
             git pull origin main # Pull the latest changes from GitHub
             cd /backend/
             npm install
-            sudo systemctl restart backend
+            systemctl restart backend
             cd ..
             cd /frontend/
             npm install
-            sudo systemctl restart frontend
+            systemctl restart frontend
 
             
