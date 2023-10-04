@@ -6,7 +6,7 @@ WORKDIR /usr/src/app/backend
 
 COPY package.json ./
 
-RUN npm ci
+RUN npm install
 
 COPY . .
 
