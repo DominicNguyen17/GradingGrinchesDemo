@@ -5,8 +5,8 @@ services:
     ports:
       - "3000:3000"
     container_name: frontend-docker
-    links:
-      - backend
+    networks:
+      - react-node
 
   backend:
     build: ./backend
@@ -14,6 +14,7 @@ services:
       - "8888:8888"
     container_name: backend-docker
     networks:
+      - react-node
       - node-network
 
   db:
@@ -26,3 +27,4 @@ services:
 
 networks:
   node-network:
+  react-node:
