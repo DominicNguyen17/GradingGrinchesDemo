@@ -20,6 +20,15 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - run: docker compose up
+    - run: cd backend
+    - run: pwd
+    - run: npm ci
+    - run: cd ..
+    - run: cd frontend
+    - run: pwd
+    - run: npm ci
+    - run: sudo systemctl daemon-reload
+    - run: sudo systemctl restart backend
+    - run: sudo systemctl restart frontend
 
             
