@@ -23,5 +23,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run : sudo systemctl daemon-reload
+    - run : pwd
     - run: docker-compose up -d
             
