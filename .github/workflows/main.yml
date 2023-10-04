@@ -23,7 +23,8 @@ jobs:
     - run: npm install
     - run: cd ./backend
     - run: npm i
-    - run: cd ../frontend
+    - run: cd ..
+    - run: cd ./frontend
     - run: npm i
     - run: sudo systemctl daemon-reload
     - run: sudo systemctl restart backend
