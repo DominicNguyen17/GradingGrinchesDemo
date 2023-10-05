@@ -3,7 +3,7 @@ import AppContext from "./context";
 
 const AppProvider = ({children}) => {
     // set up the global server url
-    const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:8888';
+    const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://ec2-3-104-223-143.ap-southeast-2.compute.amazonaws.com:8888';
     // states for rubric upload
     const [rubricUploaded, setRubricUploaded] = useState(false);
     const [fetchedRubric, setFetchedRubric] = useState(null);
