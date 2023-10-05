@@ -21,10 +21,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: sudo systemctl restart docker
-    - run: sudo docker stop $(sudo docker ps -qf 'status!=exited')
-    - run: sudo docker rm $(sudo docker ps -qf 'status=exited')
-    - run: sudo docker rmi $(sudo docker images -qf 'dangling=true')
-    - run: sudo docker volume rm $(sudo docker volume ls -qf 'dangling=true')
+    - run: sudo docker stop (sudo docker ps -qf 'status!=exited')
+    - run: sudo docker rm (sudo docker ps -qf 'status=exited')
+    - run: sudo docker rmi (sudo docker images -qf 'dangling=true')
+    - run: sudo docker volume rm (sudo docker volume ls -qf 'dangling=true')
     - run: sudo systemctl daemon-reload
     - run: sudo systemctl restart docker-compose
 
