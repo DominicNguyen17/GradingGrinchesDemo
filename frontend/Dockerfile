@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:12
 
 RUN mkdir -p /usr/src/app/frontend
 
