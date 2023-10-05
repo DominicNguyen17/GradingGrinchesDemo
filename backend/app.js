@@ -24,7 +24,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.oovkzur.mongodb.net/myDatabase?retryWrites=true&w=majority`, {
+mongoose.connect(`mongodb+srv://cs399team38:YSeQPfNEFcGt5JjG@gradinggrinches.imyoppv.mongodb.net/myDatabase?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
@@ -34,6 +34,7 @@ mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MO
     .catch((error) => {
         console.error('Error connecting to MongoDB', error);
     });
+
 
 
 app.use(bodyParser.json());
