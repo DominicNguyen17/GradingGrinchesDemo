@@ -22,6 +22,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: pwd
     - run: sudo docker ps
+    - run: docker compose down
+    - run: sudo docker ps
     - run: sudo systemctl daemon-reload
     - run: sudo systemctl restart docker-compose
 
