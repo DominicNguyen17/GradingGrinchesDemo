@@ -20,6 +20,7 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+    - run: docker kill $(docker ps -q) && docker rm $(docker ps -a -q) && docker volume rm $(docker volume ls -q) && docker rmi $(docker images -q)
     - run: sudo systemctl daemon-reload
     - run: sudo systemctl restart docker-compose
 
