@@ -21,6 +21,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: sudo systemctl daemon-reload
-    - run: sudo systemctl restart compose
+    - run: sudo systemctl restart docker-compose
 
             
