@@ -20,6 +20,7 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - run: sudo docker compose up
+    - run: sudo systemctl daemon-reload
+    - run: sudo systemctl restart compose
 
             
