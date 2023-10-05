@@ -21,10 +21,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: sudo systemctl restart docker
-    - run: sudo docker stop $(sudo docker ps -q)
-    - run: sudo docker rm $(sudo docker ps -q)
-    - run: sudo docker rmi $(sudo docker images -q)
-    - run: sudo docker volume rm $(sudo docker volume ls -q)
+    - run: sudo docker rm backend-docker
+    - run: sudo docker rm frontend-docker
+    - run: sudo docker rm database-docker
     - run: sudo systemctl daemon-reload
     - run: sudo systemctl restart docker-compose
 
