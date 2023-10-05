@@ -4,7 +4,7 @@ services:
     build: ./frontend
     ports:
       - "3000:3000"
-    container_name: GradingGrinchesDemo
+    container_name: frontend-docker
     networks:
       - react-node
 
@@ -12,7 +12,7 @@ services:
     build: ./backend
     ports:
       - "8888:8888"
-    container_name: GradingGrinchesDemo
+    container_name: backend-docker
     networks:
       - react-node
       - node-network
@@ -21,7 +21,7 @@ services:
     image: mongo:latest
     ports:
     - "27017:27017"
-    container_name: GradingGrinchesDemo
+    container_name: database-docker
     networks:
       - node-network
 
