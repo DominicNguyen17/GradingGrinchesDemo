@@ -20,10 +20,8 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - run: sudo systemctl restart docker
-    - run: sudo docker rm backend-docker
-    - run: sudo docker rm frontend-docker
-    - run: sudo docker rm database-docker
+    - run: pwd
+    - run: sudo docker ps
     - run: sudo systemctl daemon-reload
     - run: sudo systemctl restart docker-compose
 
