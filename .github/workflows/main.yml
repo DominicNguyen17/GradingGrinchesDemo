@@ -23,6 +23,7 @@ jobs:
     - run: pwd
     - run: sudo docker ps
     - run: sudo docker compose down
+    - run: sudo docker rmi -f $(docker images -aq)
     - run: sudo docker ps
     - run: sudo systemctl daemon-reload
     - run: sudo systemctl restart docker-compose

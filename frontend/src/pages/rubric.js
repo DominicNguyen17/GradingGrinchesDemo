@@ -283,7 +283,7 @@ const Rubric = () => {
                     }
                 </div> : null
                 }
-                {editMode ? null: <Link className="link" to={"/"}>Back to Home</Link>}
+                {editMode ? null: <Link className="link" to={"/class"}>Next (Upload Class List)</Link>}
             </div>
         </div>
     )
