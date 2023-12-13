@@ -1,14 +1,15 @@
 const mongoose = require("mongoose");
 
-const FeedbackItemSchema = new mongoose.Schema({
-    "feedback": String,
+const RatingItemSchema = new mongoose.Schema({
+    "mark": Number,
+    "feedbacks": [String],
 });
+
 
 const RubricItemSchema = new mongoose.Schema({
     "question_title": String,
     "marks": Number,
-    "marker comments": String,
-    "feedbacks": [FeedbackItemSchema],
+    "ratings": [RatingItemSchema],
 });
 
 const RubricSchema = new mongoose.Schema({

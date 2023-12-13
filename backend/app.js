@@ -7,8 +7,10 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
+
 const classListRoutes = require("./routes/classListRoutes");
 const rubricRoutes = require("./routes/rubricRoutes");
+const downloadRoutes = require("./routes/downloadRoutes");
 
 
 const app = express();
@@ -24,6 +26,17 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// mongoose.connect('mongodb://localhost:27017/myDatabase', {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+// })
+//     .then(() => {
+//         console.log('Connected to MongoDB');
+//     })
+//     .catch((error) => {
+//         console.error('Error connecting to MongoDB', error);
+//     });
+
 mongoose.connect(`mongodb+srv://cs399team38:YSeQPfNEFcGt5JjG@gradinggrinches.imyoppv.mongodb.net/myDatabase?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -36,11 +49,11 @@ mongoose.connect(`mongodb+srv://cs399team38:YSeQPfNEFcGt5JjG@gradinggrinches.imy
     });
 
 
-
 app.use(bodyParser.json());
 
 app.use("/class-list", classListRoutes);
 app.use("/rubric", rubricRoutes);
+app.use("/download", downloadRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

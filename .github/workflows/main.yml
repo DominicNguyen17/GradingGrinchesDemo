@@ -7,25 +7,18 @@ on:
 
 jobs:
   build:
-
     runs-on: self-hosted
-
     strategy:
       matrix:
         node-version: [12.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - run: pwd
-    - run: sudo docker ps
+    - run: sudo systemctl restart docker 
     - run: sudo docker compose down
-    - run: sudo docker rmi -f $(docker images -aq)
-    - run: sudo docker ps
+    - run: sudo docker rmi -f $(sudo docker images -aq)
     - run: sudo systemctl daemon-reload
     - run: sudo systemctl restart docker-compose
-
-            

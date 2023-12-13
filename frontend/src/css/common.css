@@ -1,3 +1,29 @@
+/** {*/
+/*    box-sizing: border-box;*/
+/*}*/
+
+/*body {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 100vh;*/
+/*    margin: 0;*/
+/*}*/
+
+/*#root {*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    margin: 0;*/
+/*}*/
+
+/*.App {*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+
 /* red button with white text color*/
 .red-button {
     background-color: #f44336; /* Red */
@@ -103,4 +129,86 @@
 
 .step-connector-line {
     border-top-style: dotted !important;
+}
+
+/* upload section */
+.upload {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.upload-description {
+    font-size: 60px;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+    color: black;
+    font-weight: bold;
+    width: auto;
+    padding: 50px;
+    max-width: 600px;
+    text-align: center;
+    margin: 200px auto;
+}
+
+.dropzone {
+    border: 2px dashed #cccccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.uploaded-files {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.uploaded-files div {
+    margin-left: 10px;
+}
+
+.loading {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+/* main layout */
+.main-page {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.progress {
+    width: 10%;
+
+}
+
+.content {
+    width: 85%;
+}
+
+.progress-bar-container {
+    margin: 50px auto auto;
+    width: 80%;
+}
+
+.download {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-button button {
+    margin-top: 20px;
 }

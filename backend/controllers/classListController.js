@@ -1,10 +1,4 @@
 const ClassListDataModel = require("../models/classListModel");
-// const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-// const { PutCommand, DynamoDBDocumentClient, GetCommand  } = require("@aws-sdk/lib-dynamodb");
-// const client = new DynamoDBClient({ region: "ap-southeast-2" })
-// const docClient = DynamoDBDocumentClient.from(client);
-// const dynamodbTableName = 'classList';
-// const { v4: uuidv4 } = require('uuid')
 
 const isValidJsonFormat = (data) => {
     if (!data || !data["class-list"] || !Array.isArray(data["class-list"])) {
@@ -12,7 +6,8 @@ const isValidJsonFormat = (data) => {
     }
     for (const item of data["class-list"]) {
         if (
-            typeof item["Student ID"] !== "string" ||
+            typeof item["Student UPI"] !== "string" ||
+            typeof item["Student Name"] !== "string" ||
             typeof item["Class ID"] !== "string" ||
             typeof item["Assignment ID"] !== "string"
         ) {
@@ -42,11 +37,12 @@ exports.uploadClassListData = async (req, res) => {
     }
 
     try {
-        const jsonData = new ClassListDataModel({ "class-list": req.body["class-list"] });
-        const savedFile = await jsonEntry.save();
-        res.status(200).json({ message: "JSON file uploaded and data saved!", id: savedFile._id });
+        const classListJsonData = new ClassListDataModel({ "class-list": req.body["class-list"] });
+        const savedFile = await classListJsonData.save();
+
+        res.status(200).json(savedFile);
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send('Internal Server Error, please try again later');
     }
 };
 
@@ -64,43 +60,17 @@ exports.uploadClassListJsonFile = async (req, res) => {
     }
 
     try {
-        //DynamoDb
-        // const params = {
-        //     TableName: dynamodbTableName,
-        //     Item: {
-        //         'id': uuidv4(), // Provide a unique identifier for the item
-        //         "class-list": jsonData["class-list"], // Convert the JSON to a string
-        //     },
-        // };
-        // const command = new PutCommand(params);
-        // const response = await docClient.send(command);
-        // res.status(200).json({ message: "JSON file uploaded and data saved!", id: params.Item.id});
-
         //MongoDb
         const jsonEntry = new ClassListDataModel({ "class-list": jsonData["class-list"] });
         const savedFile = await jsonEntry.save();
-        res.status(200).json({ message: "JSON file uploaded and data saved!", id: savedFile._id });
+        res.status(200).json(savedFile);
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send('Internal Server Error, please try again later');
     }
 };
 
 exports.getClassList = async (req, res) => {
     try {
-        //DynamoDb
-        // const id = req.params.id;
-        // const command = new GetCommand({
-        //     TableName: dynamodbTableName,
-        //     Key: {
-        //         'id': id,
-        //     },
-        // });
-        // const response = await docClient.send(command);
-        // if (!response) {
-        //     return res.status(404).send("Class List not found");
-        // }
-        // res.status(200).json(response.Item);
-
         //MongoDb
         const id = req.params.id;
         const classList = await ClassListDataModel.findById(id);
@@ -108,6 +78,26 @@ exports.getClassList = async (req, res) => {
             return res.status(404).send("Class List not found");
         }
         res.status(200).json(classList);
+    } catch (error) {
+        res.status(500).send("Internal Server Error");
+    }
+}
+
+exports.updateClassList = async (req, res) => {
+    const id = req.params.id;
+    const updatedClassList = req.body;
+    console.log(updatedClassList)
+    console.log(id);
+    try {
+        const classList = await ClassListDataModel.findById(id);
+        if (!classList) {
+            return res.status(404).send("Class List not found");
+        }
+
+        // update class list
+        classList.set(updatedClassList);
+        const savedClassList = await classList.save();
+        res.status(200).json(savedClassList);
     } catch (error) {
         res.status(500).send("Internal Server Error");
     }

@@ -1,23 +1,19 @@
+<a name="readme-top"></a>
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="=MarkWiseLogo.png" alt="Logo" width="150" height="80">
+  <a>
+    <img src="https://github.com/uoa-compsci399-s2-2023/capstone-project-team-38/blob/main/MarkWiseLogo.png" alt="Logo" width="300" height="100">
   </a>
 
   <h3 align="center">MarkWise</h3>
 
   <p align="center">
-    Project Description goes here!
+    Marking Made Easy!
     <br />
-    <a href="https://github.com/uoa-compsci399-s2-2023/capstone-project-team-38"><strong>Explore the docs »</strong></a>
+    <a href="http://ec2-13-210-24-70.ap-southeast-2.compute.amazonaws.com:3000/"><strong>Start Marking Now »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/uoa-compsci399-s2-2023/capstone-project-team-38">View Demo</a>
-    ·
-    <a href="https://github.com/uoa-compsci399-s2-2023/capstone-project-team-38">Report Bug</a>
-    ·
-    <a href="https://github.com/uoa-compsci399-s2-2023/capstone-project-team-38">Request Feature</a>
   </p>
 </div>
 
@@ -28,8 +24,9 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about-markwise">About MarkWise</a>
       <ul>
+        <li><a href="#project-management">Project Management</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -41,9 +38,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
+    <li><a href="#future-plan">Future Plan</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -52,30 +47,40 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## About MarkWise
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+MarkWise is a all inclusive grading solution from rubric to results. Built to satisfy the requirements of an efficient tool for marking, it allows markers to simply upload a rubric, upload a class list and swifty complete marking for as many or as little students as they wish to do so. The output from MarkWise can be used to populate canvas marks without a tedious stage of intermediary files.
 
-This is where a description of the project goes! <--- there needs to be a link here to the final project!
+Some reasons why this is the most efficient tool:
+* To assign grades, markers only need to click one grade option however, bespoke marks are also deliverable
+* MarkWise banks pre-specified feedback for common errors, bespoke feedback is also deliverable
+* Markers can allocate multiple points of pre-specified feedback per question
+* When a class is done, markers can simply export a .json which they can use to feed directly into canvas
 
-Here's why:
-* TBC
-* TBC
-* TBC
-
-footer...
+<a href="http://ec2-13-210-24-70.ap-southeast-2.compute.amazonaws.com:3000"><strong>Comprehensive MarkWise report coming soon!</strong></a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+### Project Management
 
+We followed a hybrid-agile project management methodology, where we didn't hold all of the possible agile ceremonies but had 1 or 2 week sprints and a standup preceding each sprint. 
+
+Check out our Gantt Chart <a href="https://docs.google.com/spreadsheets/d/1FXC-XolWA-lEN-dtBxOn6xB3BzUao6UFKWu7Q5bzFzc/edit?usp=sharing"><strong>here</strong></a>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
-Need to double check if other technologies were used!
+The core technologies used to build MarkWise:
 
-* [![Node][Node.js]][Node-url]
-* [![React][React.js]][React-url]
-* [![Dynamo][Dynamo.db]][Dynamo-url]
+| Technology  | Use | Version |
+| ------------- | ------------- | ------------- |
+| HTML  | Front End | 5 |
+| CSS  | Front End | 3 |
+| React.js | Front End | 18.2.0 |
+| Node JS | Back End | 21.0.0 |
+| MongoDB (Atlas Clusters) | Database | 6.0 |
+| AWS EC2 | Deployment | 4.9.5554 |
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -85,99 +90,98 @@ Need to double check if other technologies were used!
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Need to confirm final installation procedures
-
 ### Prerequisites
 
-<!--This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
--->
+To run MarkWise you must install Node JS <a href="https://nodejs.org/en/download/current"><strong>here</strong></a> 
+
 ### Installation
 
-<!--_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+_Follow the instructions below to run MarkWise on your local machine_
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Download the repository 
+2. Install back end dependencies _(using command line)_
    ```sh
-   git clone https://github.com/uoa-compsci399-s2-2023/capstone-project-team-38
-   ```
-3. Install NPM packages
-   ```sh
+   cd backend
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+3. Initialise back end
+   ```sh
+   cd bin
+   node www
    ```
--->
+4. Install front end dependencies 
+   ```sh
+   cd frontend
+   npm install
+   ```
+5. Run the application 
+   ```sh
+   npm start
+   ```
+6. Exit out of the MarkWise to terminate the application.
+   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
-<!-- USAGE EXAMPLES -->
+<!-- USAGE -->
 ## Usage
 
-Examples of usage section
+Click the link below to go directly to the MarkWise website or watch the demo for an elaborate demo:
 
-_URL to the website_
-
-<!--_For more examples, please refer to the [Documentation](https://example.com)_-->
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-This is where future plans would go TBD
-<!--
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).-->
+1. <a href="http://ec2-13-210-24-70.ap-southeast-2.compute.amazonaws.com:3000"><strong>Go to MarkWise</strong></a>
+2. <a href="https://drive.google.com/file/d/1ooT8GMO7-jR0_49NTV8LE-vc6A_EW8pT/view"><strong>Watch a MarkWise Demo »</strong></a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
-<!-- LICENSE -->
-## License
+<!-- Future Plan -->
+## Future Plan
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Below is a list of features we'd look to implement for future releases but were either out of scope for our first release or required sigificant time investment: 
+
+- [ ] Edit multiple student grades or feedback simultaneously - for even more optimised efficiency
+- [ ] Dark mode option - for enhanced usability
+- [ ] Rubric building from scratch
+- [ ] Authentication and SSO integration - to allow course coordinators to remidate marking issues quickly
+- [ ] Add .pdf file viewer within MarkWise
+- [ ] Expand supported rubric and class list import and export file types
+    - [x] .json
+    - [x] .csv
+    - [ ] .xlsx
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- CONTACT -->
 ## Contact
 
-sli471 | drea465 | lcai834 | wany973 | dche176 | pugn783
-
-Annie Li | Donovan Rea | Lily Cai | Yuankun (Kelvin) Wang | David Hong Lek Chen | Phu (Dominic) Nguyen
+| Name  | Role | Contact |
+| ------------- | ------------- | ------------- |
+| Donovan Rea  | Project Manager & UI/UX design | drea465@aucklanduni.ac.nz |
+| Annie Li  | Lead Backend Developer | sli471@aucklanduni.ac.nz |
+| Lily Cai  | Lead Frontend Developer | lcai834@aucklanduni.ac.nz |
+| Yuankun (Kelvin) Wang  | Backend Developer | wany973@aucklanduni.ac.nz |
+| David Hong Lek Chen  | Full Stack Developer  | dche176@aucklanduni.ac.nz |
+| Phu (Dominic) Nguyen  | Full Stack Developer & Deployment Specialist  | pugn783@aucklanduni.ac.nz |
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+Key resources used to troubleshoot and learn the intricacies of technologies used in MarkWise:
 
-* A
-* B
+* <a href="https://nodejs.org/en/docs"><strong>Node JS Documentation</strong></a>
+* <a href="https://github.com/reactjs/react.dev"><strong>React.js Documentation</strong></a>
+* <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"><strong>Markdown Cheatsheet</strong></a>
+* <a href="https://medium.com/@rajani103/deploying-nodejs-app-on-aws-ec2-instance-step-by-step-1b00f807cdce"><strong>AWS EC2 Tutorial</strong></a>
 
+Special thanks to the CS399 course team and the NZ AWS team!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

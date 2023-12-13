@@ -1,10 +1,4 @@
 const RubricModel = require("../models/rubricModel");
-// const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-// const { PutCommand, DynamoDBDocumentClient, GetCommand  } = require("@aws-sdk/lib-dynamodb");
-// const client = new DynamoDBClient({ region: "ap-southeast-2" })
-// const docClient = DynamoDBDocumentClient.from(client);
-// const dynamodbTableName = 'Rubric';
-// const { v4: uuidv4 } = require('uuid')
 
 const isValidJsonFormat = (data) => {
     if (!data || !data["assignment title"] || !data["owner"] || !data["rubric"] || !Array.isArray(data["rubric"])) {
@@ -14,10 +8,19 @@ const isValidJsonFormat = (data) => {
         if (
             typeof item["question_title"] !== "string" ||
             typeof item["marks"] !== "number" ||
-            typeof item["marker comments"] !== "string"
-            // Todo - add check for feedbacks
+            !Array.isArray(item["ratings"]) ||
+            item["ratings"].length === 0
         ) {
             return false;
+        } else {
+            for (const rating of item["ratings"]) {
+                if (
+                    typeof rating["mark"] !== "number" ||
+                    !Array.isArray(rating["feedbacks"])) {
+                    // feedback can be empty
+                    return false;
+                }
+            }
         }
     }
     return true;
@@ -48,9 +51,9 @@ exports.uploadRubricJsonFile = async (req, res) => {
     try {
         const jsonEntry = new RubricModel({ "owner": jsonData["owner"], "assignment title": jsonData["assignment title"], "rubric": jsonData["rubric"] });
         const savedFile = await jsonEntry.save();
-        res.status(200).json({ message: "JSON file uploaded and data saved!", id: savedFile._id });
+        res.status(200).json(savedFile);
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send('Internal Server Error, please try again later');
     }
 };
 

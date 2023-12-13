@@ -1,37 +1,20 @@
-import Header from "../components/header";
-import Container from "../components/container";
-import "../css/home.css";
+import Header from "../components/Header";
+import "../css/Home.css";
 import {Link} from "react-router-dom";
-import Sidebar from "./progress";
 
-const Home = ({rubricUploaded, handleRubricUpload}) => {
+const Home = () => {
 
-    return <div className="main-page">
-        <Header></Header>
-        <Sidebar activeStep={2}></Sidebar>
-        <div className="operations">
-            <section className="operation-line">
-                <Container>
-                    <Link className="operation-name" to={"/rubric"}>
-                        Rubric Editing & Upload
-                    </Link>
-                </Container>
-                <Container>
-                    <Link className="operation-name" to={"/class"}>
-                        Class information & Export
-                    </Link>
-                </Container>
-            </section>
-            <section className="operation-line">
-                <Container>
-                    <Link className="operation-name start-mark" to={"/marking"}>
-                        Start Marking
-                    </Link>
-                </Container>
-            </section>
+
+    return (
+        <div className={"home"}>
+            <Header></Header>
+            <div className={"marking-description"}>
+                Grading Made Easy
+            </div>
+
+            <Link className={"big-button"} to={"/class"}>START<br></br>MARKING</Link>
         </div>
-    </div>
-
+    );
 }
 
 export default Home;
